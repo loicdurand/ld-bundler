@@ -10,7 +10,7 @@ exports.unix = {
 
         files.forEach(function (file) {
             if (fs.statSync(dirPath + "/" + file).isDirectory()) {
-                arrayOfFiles = getAllFiles(dirPath + "/" + file, arrayOfFiles)
+                arrayOfFiles = fs.readdirSync(dirPath + "/" + file, arrayOfFiles)
             } else {
                 arrayOfFiles.push(path.join(dirPath, "/", file))
             }

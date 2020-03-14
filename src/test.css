@@ -1,0 +1,33 @@
+Hello, Hello#test{
+    color: red;
+}
+
+p.Hello{
+    text-align: center;
+}
+
+#Hello {
+    text-align: center;
+}
+
+[title="Hello"],
+[title=Hello],Hello.test,
+p#Hello,
+Hello[title="test"] {
+    text-align: center;
+}
+
+Hello, Red {
+    color: red;
+    text-decoration: underline;
+}
+
+p.Hello,
+#Hello, [title="Hello"],Hello, div Hello, div > Hello, p~Hello {
+    display: block;
+}
+
+BlueBG{
+    background: blue;
+}
+

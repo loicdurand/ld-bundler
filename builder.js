@@ -4,7 +4,7 @@ const //
     fs = require('fs'),
     argmts = process.argv.slice(2),
     [input = 'src', out = 'dist'] = argmts,
-    outputDir = (out + '/' + input.replace(/^.*\//, '')).replace(/\/$/, ''),
+    outputDir = (out + '/' + input.replace(new RegExp(input), '').replace(/^.*\//, '')).replace(/\/$/, ''),
     unixlikecmds = require('./unix').unix,
     { ls, cat, cd, mkdir, touch, rm } = unixlikecmds,
 
@@ -91,7 +91,8 @@ const //
             mkdir(outputDir);
             // cd('dist');
             data.styles.map(style => {
-                const outfile = (outputDir + '/' + style.path).replace(/\.{1}\//, '')
+                const outfile = outputDir + '/' + (style.path.replace(/\.{1}\//, ''));
+                console.log(outputDir, style.path, outfile);
                 rm(outfile);
                 //touch(outfile);
                 fs.appendFileSync(outfile, style.content);
@@ -134,6 +135,7 @@ const //
             console.error(err)
         }
     };
+
 //origin = 'test.js';
 
 files
@@ -142,7 +144,7 @@ files
         main(inputFile);
     });
 
-
+exports.bundler = main;
 
 //cd('src');
 
