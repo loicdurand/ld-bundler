@@ -19,7 +19,6 @@ const //
         },
 
         mkdir: targetDir => {
-            console.log({ targetDir });
             try {
                 fs.mkdirSync(targetDir, { recursive: true });
             } catch (error) {
@@ -28,7 +27,6 @@ const //
         },
 
         touch: (targetFile, content = '') => {
-            console.log({ targetFile });
             const //
                 targetDir = targetFile.split(/\//),
                 createdFile = targetDir.join('/');
@@ -44,7 +42,7 @@ const //
         cat: path => {
             const content = [];
             try {
-                content.push(fs.readFileSync(path, 'utf8'));
+                content.push(fs.readFileSync(path, { encoding: "UTF-8" }));
             } catch (err) {
                 console.log(err);
             }
