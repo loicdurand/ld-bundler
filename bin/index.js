@@ -6,4 +6,4 @@ const //
     { getOptions } = require('./options'),
     options = getOptions(process.argv.slice(2));
 
-exports.ldbundler = ldbundler(options);
+exports['ld-bundler'] = ldbundler(options);
