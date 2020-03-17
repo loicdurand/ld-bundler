@@ -1,5 +1,5 @@
 
-exports.ldbuilder = () => {
+exports.ldbundler = () => {
 
     const // 
         fs = require('fs'),

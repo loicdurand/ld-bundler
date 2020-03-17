@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "ldbuilder": "./bin/ldbuilder.js"
+    "ldbundler": "./bin/ldbundler.js"
   },
   "repository": {
     "type": "git",
