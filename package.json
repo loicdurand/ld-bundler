@@ -2,9 +2,12 @@
   "name": "ld-bundler",
   "version": "0.0.1",
   "description": "A small bundler designed to transpile code using my own \"ld-componenents\" library",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "ldbuilder": "./bin/ldbuilder.js"
   },
   "repository": {
     "type": "git",
