@@ -46,8 +46,9 @@ exports.ldbundler = options => {
         dest = setScope(_dest),
         watcher = isDir(src) || isFile(src) ? hound.watch(src) : exit(`file '${src}' does'nt exist or is not a directory`),
         run = () => {
+
             const //
-                filesInScope = ls(src),
+                filesInScope = isFile(src) ? [src] : ls(src),
                 otherFiles = [],
                 jsFiles = filesInScope.filter(f => {
                     if (/\.js[x]?$/.test(f))

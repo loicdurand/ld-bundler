@@ -1,9 +1,11 @@
 const // 
     fs = require('fs'),
     path = require("path"),
+    { closeSync, openSync, utimesSync, unlinkSync } = fs,
     unix = {
 
         ls: (dirPath, arrayOfFiles = []) => {
+            console.log('ls', { irPath });
             if (fs.existsSync(dirPath) && fs.statSync(dirPath).isFile())
                 return [dirPath];
             files = fs.readdirSync(dirPath)
