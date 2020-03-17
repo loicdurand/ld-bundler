@@ -1,16 +1,16 @@
 
-exports.ldbundler = () => {
+exports.ldbundler = options => {
 
     const // 
         fs = require('fs'),
+        process = require('process'),
         hound = require('hound'),
         { unix } = require('./unix'),
-        { getOptions } = require('./options'),
         { ls, cat, touch } = unix,
         importRE = /import(?:["'\s]*([\w*{}\n, ]+)from\s*)?["'\s]*([@\w/_-]+)["'\s].*/,
         //
         cleanPath = path => path.replace(/\.{1}\//, '').replace(/\/$/, ''),
-        setScope = path => cleanPath(__dirname + '/' + path),
+        setScope = path => cleanPath(process.cwd() + '/' + path),
         isFile = file => fs.existsSync(file) && fs.statSync(file).isFile(),
         isDir = dir => fs.existsSync(dir) && fs.statSync(dir).isDirectory(),
         isStyleFile = file => /\.(s?c|sa|le)ss$/.test(file),
@@ -34,7 +34,6 @@ exports.ldbundler = () => {
         },
         replaceByDist = path => path.replace(new RegExp('^' + src), dest),
         //
-        options = getOptions(process.argv.slice(2)),
         logs = [],
         pushLogs = msg => {
             msg && options.verbose && logs.push(msg);
