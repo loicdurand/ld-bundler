@@ -2,4 +2,4 @@
 
 const ldbundler = require('../src/index');
 
-console.log(ldbuilder);
+exports.ldbundler = ldbundler();
