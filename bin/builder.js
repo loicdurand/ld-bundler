@@ -2,7 +2,8 @@
 exports.ldbundler = options => {
 
     let //
-        sheetId = 0;
+        sheetId = 0,
+        ids = {};
 
     const // 
         fs = require('fs'),
@@ -17,7 +18,6 @@ exports.ldbundler = options => {
         isFile = file => fs.existsSync(file) && fs.statSync(file).isFile(),
         isDir = dir => fs.existsSync(dir) && fs.statSync(dir).isDirectory(),
         isStyleFile = file => /\.(s?c|sa|le)ss$/.test(file),
-        ids = {},
         stylesheetRulesStops = [' ', '\t', '\n', ',', '[', '>', '~', ':', '+', '{', ';'],
         isCpnt = str => /^[A-Z]\w?/.test(str),
         getPath = (pathToAFile, relativePathToAnother) => {
@@ -185,6 +185,7 @@ ${jsFiles.length ? jsFiles.length + ' javascript file(s) found\n================
                             after.push(`import '${moduleName}';`);
                             after.push(`import ${importName} from './${importName}.def.js';`);
                             touch(getPath(outputFile, `${importName}.def.js`), `export default ${JSON.stringify(ids, null, '\t')};`);
+                            ids = {};
                             pushLogs('\t==> creating ' + getPath(outputFile, `${importName}.def.js`) + '\n');
                         } else {
                             after.push(line);
