@@ -2,7 +2,6 @@
 exports.ldbundler = options => {
 
     let //
-        ids = {},
         sheetId = 0;
 
     const // 
@@ -18,6 +17,7 @@ exports.ldbundler = options => {
         isFile = file => fs.existsSync(file) && fs.statSync(file).isFile(),
         isDir = dir => fs.existsSync(dir) && fs.statSync(dir).isDirectory(),
         isStyleFile = file => /\.(s?c|sa|le)ss$/.test(file),
+        ids = {},
         stylesheetRulesStops = [' ', '\t', '\n', ',', '[', '>', '~', ':', '+', '{', ';'],
         isCpnt = str => /^[A-Z]\w?/.test(str),
         getPath = (pathToAFile, relativePathToAnother) => {
@@ -121,11 +121,13 @@ ${jsFiles.length ? jsFiles.length + ' javascript file(s) found\n================
                                     countCpnts = 0,
                                     cpntId = 0,
                                     end = '',
-                                    tmp = final = [];
+                                    tmp = [],
+                                    final = [];
                                 [...style].map(char => {
 
                                     if (stylesheetRulesStops.indexOf(char) != -1) {
                                         let content = tmp.join('');
+
                                         if (isCpnt(content)) {
                                             countCpnts++;
                                             content = content.replace(/[\.#].*/, m => {
@@ -137,7 +139,7 @@ ${jsFiles.length ? jsFiles.length + ' javascript file(s) found\n================
                                             content = '.' + ids[content] + end;
                                             end = '';
                                         }
-                                        content += char
+                                        content += char;
 
                                         final.push(content);
                                         tmp = [];
@@ -147,13 +149,13 @@ ${jsFiles.length ? jsFiles.length + ' javascript file(s) found\n================
 
                                 });
 
+                                final.push(tmp);
                                 pushLogs('\t==> ' + countCpnts + ' rule(s) regarding components found');
                                 pushLogs('\t==> creating ' + replaceByDist(pathToTheStyleFile));
                                 alreadyCreateds.push(replaceByDist(pathToTheStyleFile));
 
                                 touch(replaceByDist(pathToTheStyleFile), final.join(''));
                                 sheetId++;
-                                ids = {};
                             }
                         });
 
