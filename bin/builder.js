@@ -1,6 +1,9 @@
 
 exports.ldbundler = options => {
 
+    let //
+        sheetId = 0;
+
     const // 
         fs = require('fs'),
         process = require('process'),
@@ -77,9 +80,7 @@ ${jsFiles.length ? jsFiles.length + ' javascript file(s) found\n================
                 .map((jsFile, index, pathToThisFile) => ({ content: cat(jsFile), path: pathToThisFile[index] }))
                 .filter(({ content, path: pathToThisFile }) => {
 
-                    let // 
-                        sheetId = 0,
-                        usesAssocFunction = false;
+                    let usesAssocFunction = false;
                     const //
                         lines = content.split(/\n/m);
 
