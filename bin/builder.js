@@ -2,6 +2,7 @@
 exports.ldbundler = options => {
 
     let //
+        ids = {},
         sheetId = 0;
 
     const // 
@@ -17,7 +18,6 @@ exports.ldbundler = options => {
         isFile = file => fs.existsSync(file) && fs.statSync(file).isFile(),
         isDir = dir => fs.existsSync(dir) && fs.statSync(dir).isDirectory(),
         isStyleFile = file => /\.(s?c|sa|le)ss$/.test(file),
-        ids = {},
         stylesheetRulesStops = [' ', '\t', '\n', ',', '[', '>', '~', ':', '+', '{', ';'],
         isCpnt = str => /^[A-Z]\w?/.test(str),
         getPath = (pathToAFile, relativePathToAnother) => {
@@ -153,6 +153,7 @@ ${jsFiles.length ? jsFiles.length + ' javascript file(s) found\n================
 
                                 touch(replaceByDist(pathToTheStyleFile), final.join(''));
                                 sheetId++;
+                                ids = {};
                             }
                         });
 
