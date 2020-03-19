@@ -17,7 +17,7 @@ exports.ldbundler = options => {
         isFile = file => fs.existsSync(file) && fs.statSync(file).isFile(),
         isDir = dir => fs.existsSync(dir) && fs.statSync(dir).isDirectory(),
         isStyleFile = file => /\.(s?c|sa|le)ss$/.test(file),
-        ids = {},
+        //ids = {},
         stylesheetRulesStops = [' ', '\t', '\n', ',', '[', '>', '~', ':', '+', '{', ';'],
         isCpnt = str => /^[A-Z]\w?/.test(str),
         getPath = (pathToAFile, relativePathToAnother) => {
@@ -77,8 +77,8 @@ ${jsFiles.length ? jsFiles.length + ' javascript file(s) found\n================
 `);
 
             jsFiles
-                .map((jsFile, index, pathToThisFile) => ({ content: cat(jsFile), path: pathToThisFile[index] }))
-                .filter(({ content, path: pathToThisFile }) => {
+                .map((jsFile, index, pathToThisFile) => ({ content: cat(jsFile), path: pathToThisFile[index], ids: {} }))
+                .filter(({ content, path: pathToThisFile, ids }) => {
 
                     let usesAssocFunction = false;
                     const //
@@ -170,7 +170,7 @@ ${jsFiles.length ? jsFiles.length + ' javascript file(s) found\n================
 
                     return usesAssocFunction;
 
-                }).map(({ content, path: pathToThisFile }) => {
+                }).map(({ content, path: pathToThisFile, ids }) => {
 
                     if (!associations.hasOwnProperty(pathToThisFile)) {
                         touch(replaceByDist(pathToThisFile), content);
