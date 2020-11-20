@@ -5,6 +5,7 @@ exports.ldbundler = options => {
         sheetId = 0;
 
     const // 
+        lib = options.lib || 'ld-components',
         fs = require('fs'),
         process = require('process'),
         hound = require('hound'),
@@ -95,7 +96,7 @@ ${jsFiles.length ? jsFiles.length + ' javascript file(s) found\n================
                                 moduleName = splits.pop(),
                                 importName = splits[1],
                                 checkUsesAssoc = () => (
-                                    (moduleName == 'ld-components') &&
+                                    (moduleName == options.lib) &&
                                     ('{assoc}' == splits
                                         .filter(split => ['{', 'assoc', '}'].indexOf(split) != -1)
                                         .join('')
@@ -103,7 +104,7 @@ ${jsFiles.length ? jsFiles.length + ' javascript file(s) found\n================
                                 );
                             usesAssocFunction = checkUsesAssoc() ? true : usesAssocFunction;
 
-                            pushLogs(checkUsesAssoc() ? '\t==> import statement found for "ld-components"' : '');
+                            pushLogs(checkUsesAssoc() ? '\t==> import statement found for "' + options.lib + '"' : '');
 
                             if (isStyleFile(moduleName)) {
                                 pushLogs('\t==> import statement found for "' + moduleName + '"');
