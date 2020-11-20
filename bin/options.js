@@ -15,12 +15,16 @@ exports.getOptions = args => {
                 inputs: ['-o', '--output-dir'],
                 cb: (argmts, i) => argmts[i + 1]
             },
-            lib:{
-                inputs: ['-l', '--lib'],
-                cb: (argmts, i) => argmts[i + 1]  
+            importName: {
+                inputs: ['-n', '--import-name'],
+                cb: (argmts, i) => argmts[i + 1]
             },
-            verbose:{
-                inputs:['-v','--verbose'],
+            lib: {
+                inputs: ['-l', '--lib'],
+                cb: (argmts, i) => argmts[i + 1]
+            },
+            verbose: {
+                inputs: ['-v', '--verbose'],
                 cb: () => true
             }
         };

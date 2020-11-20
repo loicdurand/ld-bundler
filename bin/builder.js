@@ -5,6 +5,7 @@ exports.ldbundler = options => {
         sheetId = 0;
 
     const // 
+        opts_importName = options.importName || 'assoc',
         lib = options.lib || 'ld-components',
         fs = require('fs'),
         process = require('process'),
@@ -97,8 +98,8 @@ ${jsFiles.length ? jsFiles.length + ' javascript file(s) found\n================
                                 importName = splits[1],
                                 checkUsesAssoc = () => (
                                     (moduleName == options.lib) &&
-                                    ('{assoc}' == splits
-                                        .filter(split => ['{', 'assoc', '}'].indexOf(split) != -1)
+                                    ('{' + opts_importName + '}' == splits
+                                        .filter(split => ['{', opts_importName, '}'].indexOf(split) != -1)
                                         .join('')
                                     )
                                 );
